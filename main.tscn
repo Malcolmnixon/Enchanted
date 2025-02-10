@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://oyb5of3arb1b"]
+
+[ext_resource type="PackedScene" uid="uid://cjcehqrfoxav3" path="res://addons/hand_pose_detector/hands/LeftHandHumanoid.gltf" id="1_7idx8"]
+[ext_resource type="PackedScene" uid="uid://dabmoo0spa6vg" path="res://addons/hand_pose_detector/hands/RightHandHumanoid.gltf" id="2_wi1f6"]
+[ext_resource type="PackedScene" uid="uid://brttccl02wbsg" path="res://start_xr.tscn" id="3_pxd27"]
+
+[sub_resource type="Environment" id="Environment_fmgpv"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.352941, 0.352941, 0.352941, 1)
+reflected_light_source = 1
+tonemap_mode = 2
+
+[node name="Main" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_fmgpv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 6, 0)
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="LeftTrackedHand" type="XRNode3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1, 0)
+tracker = &"/user/hand_tracker/left"
+show_when_tracked = true
+
+[node name="LeftHandHumanoid" parent="XROrigin3D/LeftTrackedHand" instance=ExtResource("1_7idx8")]
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="1"]
+
+[node name="RightTrackedHand" type="XRNode3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1, 0)
+tracker = &"/user/hand_tracker/right"
+show_when_tracked = true
+
+[node name="RightHandHumanoid" parent="XROrigin3D/RightTrackedHand" instance=ExtResource("2_wi1f6")]
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid/RightHandHumanoid/Skeleton3D" index="1"]
+hand_tracker = &"/user/hand_tracker/right"
+
+[node name="StartXR" parent="." instance=ExtResource("3_pxd27")]
+
+[editable path="XROrigin3D/LeftTrackedHand/LeftHandHumanoid"]
+[editable path="XROrigin3D/RightTrackedHand/RightHandHumanoid"]
