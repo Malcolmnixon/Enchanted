@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://crilxdphfol8d"]
+
+[ext_resource type="Script" path="res://ar/global_mesh/global_mesh.gd" id="1_yiel2"]
+[ext_resource type="Material" uid="uid://ckjowmasjxvaj" path="res://ar/global_mesh/global_mesh.tres" id="2_qi1jy"]
+
+[node name="GlobalMesh" type="StaticBody3D"]
+script = ExtResource("1_yiel2")
+material = ExtResource("2_qi1jy")

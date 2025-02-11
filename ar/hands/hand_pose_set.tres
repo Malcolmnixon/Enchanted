@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HandPoseSet" load_steps=5 format=3 uid="uid://bmmigv35h8cxa"]
+
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="1_vg67v"]
+[ext_resource type="Resource" uid="uid://dhbqusuodrl3r" path="res://addons/hand_pose_detector/poses/fist.tres" id="2_c4yhd"]
+[ext_resource type="Resource" uid="uid://c5pg3bqcsep5y" path="res://addons/hand_pose_detector/poses/metal.tres" id="3_cneg2"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_set.gd" id="4_f1s8l"]
+
+[resource]
+script = ExtResource("4_f1s8l")
+poses = Array[ExtResource("1_vg67v")]([ExtResource("2_c4yhd"), ExtResource("3_cneg2")])

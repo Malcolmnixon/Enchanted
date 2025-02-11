@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcjr1trix0aie"]
+
+[ext_resource type="Script" path="res://ar/spells/fireball.gd" id="1_k2x8b"]
+[ext_resource type="Texture2D" uid="uid://c2depw22ryg7c" path="res://addons/kenney_particle_pack/flame_04.png" id="2_lg1im"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rbyv2"]
+radius = 0.05
+
+[sub_resource type="SphereMesh" id="SphereMesh_v0c6o"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ekkm"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_lg1im")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_lqrs2"]
+offsets = PackedFloat32Array(0, 0.160326, 0.826087, 1)
+colors = PackedColorArray(0, 0, 0, 0, 2, 2, 0.3, 1, 1.5, 0.2, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_632yg"]
+gradient = SubResource("Gradient_lqrs2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p0a8k"]
+emission_shape = 1
+emission_sphere_radius = 0.01
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_632yg")
+turbulence_noise_scale = 0.67
+
+[sub_resource type="QuadMesh" id="QuadMesh_n6yde"]
+size = Vector2(0.2, 0.2)
+
+[node name="Fireball" type="AnimatableBody3D"]
+collision_layer = 0
+sync_to_physics = false
+script = ExtResource("1_k2x8b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_rbyv2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_v0c6o")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_8ekkm")
+amount = 200
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_p0a8k")
+draw_pass_1 = SubResource("QuadMesh_n6yde")
