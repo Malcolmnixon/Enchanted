@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ckjowmasjxvaj"]
+
+[ext_resource type="Shader" path="res://ar/global_mesh/global_mesh.gdshader" id="1_8p4hd"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8p4hd")

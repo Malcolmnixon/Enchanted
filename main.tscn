@@ -1,8 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://oyb5of3arb1b"]
+[gd_scene load_steps=11 format=3 uid="uid://oyb5of3arb1b"]
 
 [ext_resource type="PackedScene" uid="uid://cjcehqrfoxav3" path="res://addons/hand_pose_detector/hands/LeftHandHumanoid.gltf" id="1_7idx8"]
+[ext_resource type="Script" path="res://main.gd" id="1_csiyf"]
 [ext_resource type="PackedScene" uid="uid://dabmoo0spa6vg" path="res://addons/hand_pose_detector/hands/RightHandHumanoid.gltf" id="2_wi1f6"]
+[ext_resource type="PackedScene" uid="uid://bh8isvqs258cp" path="res://addons/hand_pose_detector/hand_pose_controller.tscn" id="3_l2vqo"]
 [ext_resource type="PackedScene" uid="uid://brttccl02wbsg" path="res://start_xr.tscn" id="3_pxd27"]
+[ext_resource type="PackedScene" uid="uid://crilxdphfol8d" path="res://ar/global_mesh/global_mesh.tscn" id="4_8c7ac"]
+[ext_resource type="Resource" uid="uid://c7gtqq7mvo024" path="res://ar/hands/hand_pose_action_map.tres" id="4_emive"]
+[ext_resource type="Resource" uid="uid://bmmigv35h8cxa" path="res://ar/hands/hand_pose_set.tres" id="5_jaoyk"]
+[ext_resource type="PackedScene" uid="uid://b7bens4thja4w" path="res://ar/spells/spell_caster.tscn" id="7_hx2um"]
 
 [sub_resource type="Environment" id="Environment_fmgpv"]
 background_mode = 1
@@ -13,6 +19,7 @@ reflected_light_source = 1
 tonemap_mode = 2
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_csiyf")
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -36,6 +43,10 @@ show_when_tracked = true
 
 [node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftTrackedHand/LeftHandHumanoid/LeftHandHumanoid/Skeleton3D" index="1"]
 
+[node name="HandPoseController" parent="XROrigin3D/LeftTrackedHand" instance=ExtResource("3_l2vqo")]
+controller_action_map = ExtResource("4_emive")
+hand_pose_set = ExtResource("5_jaoyk")
+
 [node name="RightTrackedHand" type="XRNode3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1, 0)
 tracker = &"/user/hand_tracker/right"
@@ -45,6 +56,26 @@ show_when_tracked = true
 
 [node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightTrackedHand/RightHandHumanoid/RightHandHumanoid/Skeleton3D" index="1"]
 hand_tracker = &"/user/hand_tracker/right"
+
+[node name="HandPoseController" parent="XROrigin3D/RightTrackedHand" instance=ExtResource("3_l2vqo")]
+controller_tracker_name = "/user/hand_pose_controller/right"
+controller_action_map = ExtResource("4_emive")
+hand_tracker_name = "/user/hand_tracker/right"
+hand_pose_set = ExtResource("5_jaoyk")
+
+[node name="LeftVirtualController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"/user/hand_pose_controller/left"
+
+[node name="SpellCaster" parent="XROrigin3D/LeftVirtualController" instance=ExtResource("7_hx2um")]
+
+[node name="RightVirtualController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"/user/hand_pose_controller/right"
+
+[node name="SpellCaster" parent="XROrigin3D/RightVirtualController" instance=ExtResource("7_hx2um")]
+
+[node name="SceneManager" type="OpenXRFbSceneManager" parent="XROrigin3D"]
+default_scene = ExtResource("4_8c7ac")
+unique_name_in_owner = true
 
 [node name="StartXR" parent="." instance=ExtResource("3_pxd27")]
 
