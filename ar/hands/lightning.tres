@@ -1,0 +1,101 @@
+[gd_resource type="Resource" script_class="HandPose" load_steps=13 format=3 uid="uid://8kyxp8p3nnv0"]
+
+[ext_resource type="Script" path="res://addons/hand_pose_detector/fitness_function.gd" id="1_6gpoa"]
+[ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="2_kb37q"]
+
+[sub_resource type="Resource" id="Resource_xltr5"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = 4.0
+from = 7.0
+to = 13.0
+max = 16.0
+
+[sub_resource type="Resource" id="Resource_hp7ec"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = 4.0
+from = 7.0
+to = 13.0
+max = 16.0
+
+[sub_resource type="Resource" id="Resource_rudpc"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = -20.0
+from = -15.0
+to = 15.0
+max = 20.0
+
+[sub_resource type="Resource" id="Resource_u5l6k"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = -20.0
+from = -15.0
+to = 15.0
+max = 20.0
+
+[sub_resource type="Resource" id="Resource_2krph"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = -20.0
+from = -15.0
+to = 15.0
+max = 20.0
+
+[sub_resource type="Resource" id="Resource_mtrhp"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = -20.0
+from = -15.0
+to = 15.0
+max = 20.0
+
+[sub_resource type="Resource" id="Resource_nguvj"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = -20.0
+from = -15.0
+to = 15.0
+max = 20.0
+
+[sub_resource type="Resource" id="Resource_65cb0"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = -20.0
+from = -15.0
+to = 15.0
+max = 20.0
+
+[sub_resource type="Resource" id="Resource_mg0wa"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = -20.0
+from = -15.0
+to = 15.0
+max = 20.0
+
+[sub_resource type="Resource" id="Resource_gi5nw"]
+script = ExtResource("1_6gpoa")
+type = 1
+min = -20.0
+from = -15.0
+to = 15.0
+max = 20.0
+
+[resource]
+script = ExtResource("2_kb37q")
+pose_name = "Lightning"
+threshold = 0.3
+hold_time = 0.2
+release_time = 0.2
+flexion_index = SubResource("Resource_nguvj")
+flexion_middle = SubResource("Resource_65cb0")
+flexion_ring = SubResource("Resource_gi5nw")
+flexion_pinky = SubResource("Resource_mg0wa")
+curl_index = SubResource("Resource_rudpc")
+curl_middle = SubResource("Resource_u5l6k")
+curl_ring = SubResource("Resource_mtrhp")
+curl_pinky = SubResource("Resource_2krph")
+abduction_index_middle = SubResource("Resource_xltr5")
+abduction_middle_ring = SubResource("Resource_hp7ec")

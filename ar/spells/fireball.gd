@@ -1,7 +1,7 @@
 extends AnimatableBody3D
 
 
-const VELOCITY := 2.5
+const VELOCITY := 4.0
 
 
 var _hit : bool = false
@@ -21,9 +21,11 @@ func _process(delta: float) -> void:
 		# Handle collision or flight-expiration
 		if collision or _expire <= 0.0:
 			# Stop emitting and let expire
-			%GPUParticles3D.emitting = false
+			%TrailParticles.emitting = false
+			%ExplosionParticles.emitting = true
+			%ExplosionSound.play()
 			_hit = true
-			_expire = 1.0
+			_expire = 2.0
 
 	# Free if expired
 	if _hit and _expire <= 0.0:

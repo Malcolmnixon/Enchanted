@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://blv7ye5k0f3ox"]
+
+[ext_resource type="Script" path="res://ar/spells/lightning.gd" id="1_6klr6"]
+[ext_resource type="Texture2D" uid="uid://cc750lgosa8v2" path="res://addons/kenney_particle_pack/spark_03.png" id="1_lbhv0"]
+[ext_resource type="AudioStream" uid="uid://bx6nrnl7vl0xc" path="res://assets/sounds/sparks.wav" id="3_os4q2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_luvq8"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_lbhv0")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_fcwys"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0395738, 0), 0.0, 0.0, 0, 0, Vector2(0.0898021, 1), 0.0, 0.0, 0, 0, Vector2(0.146119, 0), 0.0, 0.0, 0, 0, Vector2(0.216134, 0), 0.0, 0.0, 0, 0, Vector2(0.254186, 0.717391), 0.0, 0.0, 0, 0, Vector2(0.29376, 0), 0.0, 0.0, 0, 0, Vector2(0.400304, 0), 0.0, 0.0, 0, 0, Vector2(0.439878, 0.542102), 0.0, 0.0, 0, 0, Vector2(0.487062, 0), 0.0, 0.0, 0, 0, Vector2(0.563166, 0), 0.0, 0.0, 0, 0, Vector2(0.61035, 0.341772), 0.0, 0.0, 0, 0, Vector2(0.668189, 0), 0.0, 0.0, 0, 0, Vector2(0.729072, 0), 0.0, 0.0, 0, 0, Vector2(0.761035, 0.255916), 0.0, 0.0, 0, 0, Vector2(0.802131, 0), 0.0, 0.0, 0, 0, Vector2(0.858447, 0), 0.0, 0.0, 0, 0, Vector2(0.887984, 0.12282), 0.0, 0.0, 0, 0, Vector2(0.916286, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 20
+
+[sub_resource type="CurveTexture" id="CurveTexture_5vcqc"]
+curve = SubResource("Curve_fcwys")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uuexw"]
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 0, -1)
+spread = 20.0
+flatness = 1.0
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, 0, 0)
+color = Color(3, 5, 5, 1)
+alpha_curve = SubResource("CurveTexture_5vcqc")
+
+[sub_resource type="QuadMesh" id="QuadMesh_h5g5p"]
+size = Vector2(0.3, 0.3)
+
+[node name="Lightning" type="Node3D"]
+script = ExtResource("1_6klr6")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_luvq8")
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.45
+process_material = SubResource("ParticleProcessMaterial_uuexw")
+draw_pass_1 = SubResource("QuadMesh_h5g5p")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Sparks" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_os4q2")
+autoplay = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
