@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="HandPoseSet" load_steps=5 format=3 uid="uid://bmmigv35h8cxa"]
+[gd_resource type="Resource" script_class="HandPoseSet" load_steps=6 format=3 uid="uid://bmmigv35h8cxa"]
 
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose.gd" id="1_vg67v"]
 [ext_resource type="Resource" uid="uid://dhbqusuodrl3r" path="res://addons/hand_pose_detector/poses/fist.tres" id="2_c4yhd"]
-[ext_resource type="Resource" uid="uid://c5pg3bqcsep5y" path="res://addons/hand_pose_detector/poses/metal.tres" id="3_cneg2"]
+[ext_resource type="Resource" uid="uid://ceofxcl7q122" path="res://addons/hand_pose_detector/poses/point.tres" id="3_a70uy"]
 [ext_resource type="Script" path="res://addons/hand_pose_detector/hand_pose_set.gd" id="4_f1s8l"]
+[ext_resource type="Resource" uid="uid://8kyxp8p3nnv0" path="res://ar/hands/lightning.tres" id="4_ukem6"]
 
 [resource]
 script = ExtResource("4_f1s8l")
-poses = Array[ExtResource("1_vg67v")]([ExtResource("2_c4yhd"), ExtResource("3_cneg2")])
+poses = Array[ExtResource("1_vg67v")]([ExtResource("2_c4yhd"), ExtResource("3_a70uy"), ExtResource("4_ukem6")])
