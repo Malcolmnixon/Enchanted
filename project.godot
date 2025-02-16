@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 
 import/blender/enabled=false
 
+[global_group]
+
+destructible=""
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

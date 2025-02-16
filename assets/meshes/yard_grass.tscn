@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://y0o3ldi4wol1"]
+
+[ext_resource type="PackedScene" uid="uid://ity88kr74jud" path="res://assets/meshes/yard_grass/yard_grass.glb" id="1_jowhx"]
+
+[node name="YardGrass" instance=ExtResource("1_jowhx")]
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Object_0"
