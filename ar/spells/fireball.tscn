@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bcjr1trix0aie"]
+[gd_scene load_steps=18 format=3 uid="uid://bcjr1trix0aie"]
 
 [ext_resource type="Script" path="res://ar/spells/fireball.gd" id="1_k2x8b"]
 [ext_resource type="Texture2D" uid="uid://c2depw22ryg7c" path="res://addons/kenney_particle_pack/flame_04.png" id="2_lg1im"]
@@ -7,10 +7,6 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rbyv2"]
 radius = 0.05
-
-[sub_resource type="SphereMesh" id="SphereMesh_v0c6o"]
-radius = 0.05
-height = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ekkm"]
 transparency = 1
@@ -85,15 +81,12 @@ size = Vector2(0.3, 0.3)
 
 [node name="Fireball" type="AnimatableBody3D"]
 collision_layer = 0
+collision_mask = 3
 sync_to_physics = false
 script = ExtResource("1_k2x8b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_rbyv2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("SphereMesh_v0c6o")
 
 [node name="TrailParticles" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true

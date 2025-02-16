@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuqkxcsnjduau"]
+
+[ext_resource type="Script" path="res://ar/objects/destructible.gd" id="1_bredg"]
+[ext_resource type="PackedScene" uid="uid://bqkrg317dd7bb" path="res://assets/meshes/moss_flower.tscn" id="2_35brj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vgnh5"]
+radius = 0.181445
+
+[node name="MossFlower" type="StaticBody3D" groups=["destructible"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_bredg")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110201, 0)
+shape = SubResource("SphereShape3D_vgnh5")
+
+[node name="Object" parent="." instance=ExtResource("2_35brj")]
+unique_name_in_owner = true

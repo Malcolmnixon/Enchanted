@@ -5,6 +5,8 @@ const FIREBALL := preload("res://ar/spells/fireball.tscn")
 
 const LIGHTNING := preload("res://ar/spells/lightning.tscn")
 
+const SEED := preload("res://ar/spells/seed.tscn")
+
 
 @onready var controller : XRController3D = get_parent()
 
@@ -35,6 +37,11 @@ func _process(delta: float) -> void:
 		_power = 0.0
 		%PowerParticles.amount_ratio = 0.0
 		_spawn_lightning()
+	elif controller.is_button_pressed("seed"):
+		# Spawn seed
+		_power = 0.0
+		%PowerParticles.amount_ratio = 0.0
+		_spawn_seed()
 
 
 func _spawn_fireball() -> void:
@@ -51,3 +58,11 @@ func _spawn_lightning() -> void:
 	lightning.global_transform = global_transform
 	lightning.top_level = true
 	add_child(lightning)
+
+
+func _spawn_seed() -> void:
+	# Cast seed
+	var seed := SEED.instantiate()
+	seed.global_transform = global_transform
+	seed.top_level = true
+	add_child(seed)

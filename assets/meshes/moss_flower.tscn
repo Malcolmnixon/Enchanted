@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqkrg317dd7bb"]
+
+[ext_resource type="PackedScene" uid="uid://3l8ldv51o1r0" path="res://assets/meshes/moss_flower/monument__moss_flower_animated.glb" id="1_sk2j1"]
+
+[node name="MossFlower" type="Node3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_sk2j1")]
+
+[node name="AnimationPlayer" parent="Sketchfab_Scene" index="1"]
+autoplay = "Slight Wind"
+
+[editable path="Sketchfab_Scene"]
